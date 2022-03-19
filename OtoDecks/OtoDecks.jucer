@@ -4,6 +4,8 @@
               defines="JUCE_MODAL_LOOPS_PERMITTED=1" jucerFormatVersion="1">
   <MAINGROUP id="mcJZqF" name="OtoDecks">
     <GROUP id="{356C603F-01E1-55B2-02A0-F2D89D9A59E6}" name="Source">
+      <FILE id="kDgneN" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
+      <FILE id="oP3Hjd" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
       <FILE id="t1oIMX" name="SelectionCustomComponent.cpp" compile="1" resource="0"
             file="Source/SelectionCustomComponent.cpp"/>
       <FILE id="T6Iku3" name="SelectionCustomComponent.h" compile="0" resource="0"

@@ -13,6 +13,9 @@ MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
     // you add any child components.
+
+    juce::LookAndFeel::setDefaultLookAndFeel(&myLookAndFeel);
+
     setSize (800, 600);
 
     // Some platforms require permissions to open input channels so request that here

@@ -22,6 +22,43 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
                waveformDisplay(formatManagerToUse, cacheToUse)
 {
 
+
+   /* auto speedSliderRotaryParameters = volSlider.getRotaryParameters();
+
+    speedSliderRotaryParameters.startAngleRadians = juce::MathConstants<float>::pi * 1.5f;
+    speedSliderRotaryParameters.endAngleRadians = juce::MathConstants<float>::pi * 3.0f;
+
+    volSlider.setRotaryParameters(speedSliderRotaryParameters);
+
+
+    auto posSliderRotaryParameters = posSlider.getRotaryParameters();
+
+    posSliderRotaryParameters.startAngleRadians = juce::MathConstants<float>::pi * 1.5f;
+    posSliderRotaryParameters.endAngleRadians = juce::MathConstants<float>::pi * 3.0f;
+
+    posSlider.setRotaryParameters(posSliderRotaryParameters);
+
+
+    auto volSliderRotaryParameters = posSlider.getRotaryParameters();
+
+    volSliderRotaryParameters.startAngleRadians = juce::MathConstants<float>::pi * 1.5f;
+    volSliderRotaryParameters.endAngleRadians = juce::MathConstants<float>::pi * 3.0f;
+
+    posSlider.setRotaryParameters(volSliderRotaryParameters);*/
+
+
+    volSlider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::orange);
+    volSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    volSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 50, 50);
+
+    speedSlider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::red);
+    speedSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    speedSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
+
+    posSlider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::greenyellow);
+    posSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    posSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 50, 50);
+
     addAndMakeVisible(playButton);
     addAndMakeVisible(stopButton);
     addAndMakeVisible(loadButton);
@@ -72,8 +109,7 @@ void DeckGUI::paint (Graphics& g)
 
     g.setColour (Colours::white);
     g.setFont (14.0f);
-    g.drawText ("DeckGUI", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder text
+   
 }
 
 void DeckGUI::resized()
@@ -81,9 +117,9 @@ void DeckGUI::resized()
     double rowH = getHeight() / 8; 
     playButton.setBounds(0, 0, getWidth(), rowH);
     stopButton.setBounds(0, rowH, getWidth(), rowH);  
-    volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
-    speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
-    posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
+    volSlider.setBounds(0, rowH * 2, getWidth()/3, rowH * 3);
+    speedSlider.setBounds(getWidth() / 3, rowH * 2, getWidth()/3, rowH * 3);
+    posSlider.setBounds(getWidth() - (getWidth() / 3), rowH * 2, getWidth()/3, rowH * 3);
     waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
     loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
 
@@ -114,11 +150,37 @@ void DeckGUI::buttonClicked(Button* button)
 
         for each (auto item in playlist->playList->getChildIterator())
         {
-           juce::File file (item->getAttributeValue(2));
+           
+            if (player->deckName == "deck01")
+            {
+                juce::File file(item->getAttributeValue(2));
+                playQueue1.push_back(file);
+            }
 
-            player->loadURL(URL{ file });
-            waveformDisplay.loadURL(URL{ file });
+            if (player->deckName == "deck02")
+            {
+                juce::File file(item->getAttributeValue(2));
+                playQueue2.push_back(file);
+            }
+           
+           
+
+           
         }
+
+        if (playQueue1.size() > 0)
+        {
+            player->loadURL(URL{ playQueue1[0] });
+            waveformDisplay.loadURL(URL{ playQueue1[0] });
+        }
+
+        if (playQueue2.size() > 0)
+        {
+            player->loadURL(URL{ playQueue2[0] });
+            waveformDisplay.loadURL(URL{ playQueue2[0] });
+        }
+
+        
 
        
      

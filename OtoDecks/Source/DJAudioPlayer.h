@@ -15,7 +15,7 @@
 class DJAudioPlayer : public AudioSource {
   public:
 
-    DJAudioPlayer(AudioFormatManager& _formatManager);
+    DJAudioPlayer(AudioFormatManager& _formatManager, std::string _deckname);
     ~DJAudioPlayer();
 
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
@@ -35,11 +35,17 @@ class DJAudioPlayer : public AudioSource {
     /** get the relative position of the playhead */
     double getPositionRelative();
 
+    std::string deckName;
+
 private:
     AudioFormatManager& formatManager;
     std::unique_ptr<AudioFormatReaderSource> readerSource;
     AudioTransportSource transportSource; 
     ResamplingAudioSource resampleSource{&transportSource, false, 2};
+
+   
+
+    
 
 };
 

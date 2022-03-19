@@ -12,6 +12,7 @@
 #include "DJAudioPlayer.h"
 #include "DeckGUI.h"
 #include "PlayListComponent.h"
+#include "LookAndFeel.h"
 
 
 
@@ -45,13 +46,15 @@ private:
 
     PlayListComponent playListComponent;
 
-    DJAudioPlayer player1{formatManager};
+    DJAudioPlayer player1{formatManager, "deck01"};
     DeckGUI deckGUI1{&player1, &playListComponent, formatManager, thumbCache};
 
-    DJAudioPlayer player2{formatManager};
+    DJAudioPlayer player2{formatManager, "deck02"};
     DeckGUI deckGUI2{&player2,&playListComponent, formatManager, thumbCache};
 
     MixerAudioSource mixerSource; 
+
+    LookAndFeelEx myLookAndFeel;
 
    
     

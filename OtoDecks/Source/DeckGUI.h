@@ -14,6 +14,7 @@
 #include "DJAudioPlayer.h"
 #include "WaveformDisplay.h"
 #include "PlayListComponent.h"
+#include "LookAndFeel.h"
 
 
 
@@ -53,15 +54,18 @@ private:
     TextButton stopButton{"STOP"};
     TextButton loadButton{"LOAD"};
   
-    Slider volSlider; 
-    Slider speedSlider;
-    Slider posSlider;
+    CustomRotaryDail volSlider; 
+    CustomRotaryDail speedSlider;
+    CustomRotaryDail posSlider;
 
     WaveformDisplay waveformDisplay;
 
     DJAudioPlayer* player; 
 
     PlayListComponent* playlist;
+
+    std::vector<juce::File> playQueue1;
+    std::vector<juce::File> playQueue2;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };

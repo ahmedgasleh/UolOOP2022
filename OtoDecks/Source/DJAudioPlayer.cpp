@@ -10,8 +10,8 @@ Author:  matthew
 
 #include "DJAudioPlayer.h"
 
-DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager) 
-: formatManager(_formatManager)
+DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager, std::string _deckname) 
+: formatManager(_formatManager), deckName(_deckname)
 {
 
 }
